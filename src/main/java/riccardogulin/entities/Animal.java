@@ -32,13 +32,17 @@ impattanti per quanto riguarda le query polimorfiche, ovvero query che nel nostr
 coinvolgono solo cani o solo gatti no problem)
 
 */
-
+@NamedQuery(name = "findByNameStartsWith", query = "SELECT a FROM Animal a WHERE LOWER(a.name) LIKE LOWER(:partialName)")
 public abstract class Animal {
 	@Id
 	@GeneratedValue
 	protected long id;
 	protected String name;
 	protected int age;
+
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	protected Owner owner;
 
 	public Animal() {
 	}
@@ -74,6 +78,7 @@ public abstract class Animal {
 				"id=" + id +
 				", name='" + name + '\'' +
 				", age=" + age +
+				", owner=" + owner +
 				'}';
 	}
 }

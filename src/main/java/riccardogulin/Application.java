@@ -33,6 +33,10 @@ public class Application {
 		System.out.println(dog);
 		System.out.println(animal);
 
+		System.out.println("----------------------- QUERIES ---------------------");
+
+		ad.findAnimalsByOwnersName("Giovanni").forEach(System.out::println);
+
 
 		em.close();
 		emf.close();
